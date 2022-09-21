@@ -20,7 +20,7 @@ const UserSchema = new Schema(
                 ref: 'Thought'
             }
         ],
-        friends: [ //may need to change later, we will see.
+        friends: [ //may need to change later, we will see. Could end up being an array with 'this' in it ( [ this ])
             {
                 type: Schema.Types.ObjectId,
                 ref: 'User'
