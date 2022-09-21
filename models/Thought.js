@@ -28,7 +28,7 @@ const ReactionSchema = new Schema(
             //insert getters if needed
         }
     }
-)
+);
 
 const ThoughtSchema = new Schema(
     {
