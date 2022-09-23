@@ -1,6 +1,8 @@
 const { User, Thought } = require('../models');
 
 const thoughtController = {
+
+    //methods for thoughts
     getAllThoughts(req, res) {
         Thought.find({})
             .select('-__v')
@@ -58,7 +60,24 @@ const thoughtController = {
                 res.json(dbThoughtData)
             })
             .catch(err => res.json(err));
-    }      
+    },
+    
+    //methods for replies 
+    addReaction({ params, body }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $push: { reactions: body } },
+            { new: true, runValidators: true }
+        )
+        .then(dbThoughtData => {
+            if(!dbThoughtData) {
+                res.status(404).json({ message: 'No thought found with this ID' });
+                return;
+            }
+            res.json(dbThoughtData);
+        })
+        .catch(err => res.json(err));
+    }
 }
 
 module.exports = thoughtController;
