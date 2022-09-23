@@ -48,6 +48,17 @@ const thoughtController = {
             })
             .catch(err => res.status(400).json(err));
     },
+    deleteThought({ params }, res) {
+        Thought.findOneAndDelete({ _id: params.id })
+            .then(dbThoughtData => {
+                if(!dbThoughtData) {
+                    res.status(404).json({ message: 'No thought found with this ID' });
+                    return;
+                }
+                res.json(dbThoughtData)
+            })
+            .catch(err => res.json(err));
+    }      
 }
 
 module.exports = thoughtController;
