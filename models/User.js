@@ -31,7 +31,7 @@ const UserSchema = new Schema(
         toJSON: {
             virtuals: true
         },
-        id: false //not sure why I put this here it's in the pizza model though
+        id: false
     }
 );
 
